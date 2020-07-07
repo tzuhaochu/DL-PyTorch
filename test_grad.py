@@ -26,4 +26,15 @@ print(b.grad_fn)
 
 #out是标量，无需指定求导变量
 out.backward()
+print(out)
+print(x.grad)
+
+#grad在BP过程中是累加的，需要清0
+out2 = x.sum()
+out2.backward()
+print(x.grad)
+
+out3 = x.sum()
+x.grad.data.zero_()
+out3.backward()
 print(x.grad)
